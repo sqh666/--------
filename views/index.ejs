@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./header.ejs') %>
+    <title>首页</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 250px auto 0;
+        }
+        .table>div {
+            width: 100%;
+            overflow: hidden;
+        }
+        .thead>div {
+            font-weight: 600;
+        }
+        .table>div>div{
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            overflow: hidden;
+            float: left;
+        }
+        .table>div>div{
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+        }
+        .table>div:first-child>div{
+            border-top: 1px solid #ddd;
+        }
+        .table>div>div:last-child{
+            border-right: 1px solid #ddd;
+        }
+        .row-number {
+            width: 50px;
+        }
+        .author {
+            width: 140px;
+        }
+        .title {
+            width: 330px;
+        }
+        .ts {
+            width: 160px;
+        }
+        .operate {
+            width: 100px;
+        }
+        .no-data {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .pagination {
+            margin-top: 20px;
+            padding: 10px;
+        }
+        .pagination>span, 
+        .pagination>a {
+            height: 20px;
+            margin-left: 20px;
+            line-height: 20px;
+            vertical-align: top;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./nav.ejs', {name: username}) %>
+    <div class="container">
+        <div class="table">
+            <div class="thead">
+                <div class="row-number">序号</div>
+                <div class="author">作者</div>
+                <div class="title">标题</div>
+                <div class="ts">发布时间</div>
+                <div class="operate">操作</div>
+            </div>
+            <% data.articles.map((item, index) => { %>
+                <div>
+                    <div class="row-number"><%= index+1 %></div>
+                    <div class="author"><%= item.author %></div>
+                    <div class="title">
+                        <a href="/articles/detail?id=<%= item._id %>"><%= item.title %></a>
+                    </div>
+                    <div class="ts"><%= item.time %></div>
+                    <div class="operate">
+                        <a href="/articles/publish?id=<%= item._id %>&&page=<%= data.page %>">编辑</a>
+                        <a href="/articles/del?id=<%= item._id %>&&page=<%= data.page %>">删除</a>
+                    </div>
+                </div>
+            <% }) %>
+            <% if(data.articles.length==0){ %>
+                <div class="no-data">暂时没有发布文章</div>
+            <% } %>
+        </div>
+        <div class="pagination clearfix">
+            <a href="/?page=<%= Math.ceil(data.total/data.pageSize) %>">尾页</a>
+            <a href="/?page=<%= parseInt(data.page)+1 %>">下一页</a>
+            <a href="/?page=<%= parseInt(data.page)-1 %>">上一页</a>
+            <a href="/">首页</a>
+            <span>共<%= data.total %>篇文章</span>
+            <span><%= data.page %>/<%= Math.ceil(data.total/data.pageSize) %></span>
+        </div>
+    </div>
+</body>
+</html>

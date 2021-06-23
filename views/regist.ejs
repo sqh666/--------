@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./header.ejs') %>
+    <title>注册</title>
+    <link rel="stylesheet" href="/stylesheets/regist.css">
+</head>
+<body>
+    <form action="/users/regist" method="post" id="regist-form">
+        <p class="err-tip"><%= typeof msg=="undefined"?'':msg %></p>
+        <div>
+            <label for="username">用户名</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div>
+            <label for="password">用户密码</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div>
+            <label for="confirmPassword">确认密码</label>
+            <input type="password" name="confirmPassword" id="confirmPassword">
+        </div>
+        <input type="submit" value="注册" class="btn">
+    </form>
+    <p class="tip">已有账号？<a href="/login">立即登录</a>！</p>
+</body>
+</html>

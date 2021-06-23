@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header') %>
+    <title>文章详情</title>
+    <style>
+        .container {
+            width: 800px;
+            margin: 150px auto 0;
+        }
+        .tip {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./nav.ejs', {name: username}) %>
+    <div class="container">
+        <h2><%= article.title %></h2>
+        <div class="tip">
+            <span>作者：</span><span><%= article.author %></span>
+            <span>发布时间：</span><span><%= article.time %></span>
+        </div>
+        <div class="content"><%- article.content %></div>
+    </div>
+</body>
+</html>

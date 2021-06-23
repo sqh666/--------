@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./header.ejs') %>
+    <title>文章发布</title>
+    <style>
+        .article-form {
+            width: 800px;
+            margin: 180px auto;
+        }
+        .title-box {
+            margin-bottom: 20px;
+        }
+        .title-box label {
+            display: block;
+            width: 80px;
+            line-height: 30px;
+        }
+        #title {
+            width: 720px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #c6c6c6;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .content {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #c6c6c6;
+            border-radius: 4px;
+        }
+        .btn {
+            display: block;
+            height: 30px;
+            width: 80px;
+            margin-top: 15px;
+            padding: 0 15px;
+            line-height: 30px;
+            border: none;
+            border-radius: 5px;
+            background: skyblue;
+            color: #fff;
+            outline: none;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./nav.ejs', {name: username}) %>
+    <form class="article-form" action="/articles/publish" method="post">
+        <input type="hidden" name="id" value="<%= article._id %>">
+        <input type="hidden" name="username" value="<%= username %>">
+        <input type="hidden" name="page" value="<%= page %>">
+        <div class="title-box clearfix">
+            <label for="title" class="fl">文章标题：</label>
+            <input type="text" id="title" class="fl" name="title" value="<%= article.title %>" palceholder="标题在5-30个字之间">
+        </div>
+        <textarea name="content" id="editor" class="content"><%= article.content %></textarea>
+        <% if(article._id){ %>
+            <input type="submit" class="btn fr" value="修改">
+        <% }else{ %>
+            <input type="submit" class="btn fr" value="发布">
+        <% } %>
+    </form>
+
+    <script src="/javascripts/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/javascripts/xheditor/xheditor-1.2.2.min.js"></script>
+    <script src="/javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
+    <script>
+        $('#editor').xheditor({
+            /* upLinkUrl:"/upload",
+            upLinkExt:"zip,rar,txt", */
+            upImgUrl:"/articles/upload",
+            upImgExt:"jpg,jpeg,gif,png",
+            html5Upload: false,
+            upMultiple: 1
+        });
+    </script>
+</body>
+</html>

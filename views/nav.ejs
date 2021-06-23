@@ -1,0 +1,27 @@
+<style>
+    /* 平台头部nav */
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: #ffb7b2;
+    }
+    .nav-box {
+        width: 800px;
+        margin: auto;
+        line-height: 50px;
+    }
+    .nav-publish {
+        margin: 0 30px;
+    }
+</style>
+<div class="nav clearfix">
+    <div class="nav-box">
+        <a href="/" class="nav-home fl">主页</a>
+        <a href="/logout" class="nav-logout fr">退出</a>
+        <a href="/articles/publish" class="nav-publish fr">写文章</a>
+        <div class="nav-username fr"><%= name %></div>
+    </div>
+</div>
